@@ -1,8 +1,7 @@
 import express from "express";
 import cors from "cors";
-import mongoose from "mongoose";
 
-import { PORT, MONGO_URI } from "./config.js";
+import { PORT } from "./config.js";
 
 import playersRouter from "./routes/players.routes.js";
 
@@ -20,13 +19,7 @@ app.use((req, res, next) => {
 // routes
 app.use("/api/players", playersRouter);
 
-// connection
-mongoose
-  .connect(MONGO_URI)
-  .then(() => {
-    // Listen on port 4000
-    app.listen(PORT, () => {
-      console.log(`Connected to db and listening on port ${PORT}`);
-    });
-  })
-  .catch((err) => console.error(err));
+// Listen on port 4000
+app.listen(PORT, () => {
+  console.log(`Connected to db and listening on port ${PORT}`);
+});
